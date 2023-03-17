@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use Illuminate\View\View;
 
 class AuthorController extends Controller
 {
@@ -15,7 +16,17 @@ class AuthorController extends Controller
     {
         //
     }
-
+    public function popular():View {
+        $populars = Author::select("authors.name",\DB::raw('COUNT(ratings.rate) AS voter'))
+            ->leftJoin('ratings', 'authors.id', '=', 'ratings.author_id')
+            ->where("authors.id","!=",0)
+            ->where("ratings.rate",">", 5)
+            ->groupBy('authors.id')
+            ->orderBy('voter',"desc")
+            ->take(10)
+            ->get();
+        return view("authors", compact('populars'));
+    }
     /**
      * Show the form for creating a new resource.
      */

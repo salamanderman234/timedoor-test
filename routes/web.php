@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,4 +15,5 @@ use App\Http\Controllers\BookController;
 */
 
 Route::get('/', [BookController::class,'index']);
+Route::get("/authors",[AuthorController::class, 'popular']);
 
