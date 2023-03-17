@@ -27,13 +27,16 @@ class RatingController extends Controller
         $authorIdQuery = request()->query("id");
         $authorId = (int)$authorIdQuery;
         $books = [];
-        $authors = Author::where('id',"!=",0)->get();
+        $authors = Author::where('id',"!=",0)
+            ->get();
         if(count($authors) > 0) {
             $isValid = Author::find($authorId);
             if($isValid != null) {
-                $books = Book::whereRelation('author',"id","=", $authorId)->get();
+                $books = Book::whereRelation('author',"id","=", $authorId)
+                    ->get();
             } else {
-                $books = Book::whereRelation('author',"id","=", $authors[0]->id)->get();
+                $books = Book::whereRelation('author',"id","=", $authors[0]->id)
+                    ->get();
             }
         }
         return view('insert',compact('authors',"authorId","books"));
