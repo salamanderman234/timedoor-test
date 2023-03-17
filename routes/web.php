@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\RatingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +17,6 @@ use App\Http\Controllers\AuthorController;
 
 Route::get('/', [BookController::class,'index']);
 Route::get("/authors",[AuthorController::class, 'popular']);
+Route::get("/rate",[RatingController::class, 'create']);
+Route::post("/rate/save",[RatingController::class, 'store']);
 

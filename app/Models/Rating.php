@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     public function book(): BelongsTo {
         return $this->belongsTo(Book::class);
     }

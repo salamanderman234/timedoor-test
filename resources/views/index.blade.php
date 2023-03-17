@@ -20,13 +20,13 @@
                     <label for="shown">List shown :</label>
                     <select name="max" id="shown">
                         @for ($i = 10; $i <= 100; $i+=10)
-                            <option value="{{ $i }}">{{ $i }}</option>
+                            <option value="{{ $i }}" {{ $i == $intMax ? "selected" : "" }}>{{ $i }}</option>
                         @endfor
                     </select>
                 </div>
                 <div>
                     <label for="search">Search : </label>
-                    <input type="text" name="keyword" id="search">
+                    <input type="text" name="keyword" value="{{ $keyword }}" id="search">
                 </div>
                 <button type="submit">Submit</button>
             </form>

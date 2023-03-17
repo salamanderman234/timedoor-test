@@ -17,6 +17,12 @@ class BookController extends Controller
             $query->where("books.name", "LIKE", "%{$keyword}%")->orWhere("authors.name", "LIKE", "%{$keyword}%");
         }
         $books = $query->groupBy('books.id')->orderBy('avg_rate',"desc")->take($intMax)->get();
-        return view("index", compact('books'));
+        return view("index", compact('books', 'intMax', "keyword"));
+    }
+
+    public function getBooksByAuthor() {
+        $authorId = request()->query("id",1);
+        $books = Book::whereRelation('author',"id","=", (int)$authorId)->get();
+        return response()->json(['data' => $books]);
     }
 }
