@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookCategory extends Model
 {
     use HasFactory;
+    public function books(): HasMany {
+        return $this->hasMany(Book::class);
+    }
 }

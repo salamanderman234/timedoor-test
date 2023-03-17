@@ -18,8 +18,8 @@
             <form action="/">
                 <div>
                     <label for="shown">List shown :</label>
-                    <select name="shown" id="shown">
-                        @for ($i = 1; $i < 100; $i++)
+                    <select name="max" id="shown">
+                        @for ($i = 10; $i <= 100; $i+=10)
                             <option value="{{ $i }}">{{ $i }}</option>
                         @endfor
                     </select>
@@ -43,17 +43,21 @@
                         <td>Voter</td>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($books as $book)
+                <tbody> 
+                    @forelse ($books as $book)
                         <tr>
-                            <td>{{ $loop->index }}</td>
+                            <td>{{ $loop->index+1 }}</td>
                             <td>{{ $book->name }}</td>
-                            <td>{{ $book->category }}</td>
-                            <td>{{ $book->author }}</td>
-                            <td>{{ $book->rating }}</td>
+                            <td>{{ $book->category->name }}</td>
+                            <td>{{ $book->author->name }}</td>
+                            <td>{{ empty($book->avg_rate) ? 0 : round($book->avg_rate, 2) }}</td>
                             <td>{{ $book->voter }}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </main>

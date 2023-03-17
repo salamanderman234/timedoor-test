@@ -17,7 +17,7 @@ class RatingFactory extends Factory
     public function definition(): array
     {
         return [
-            'rating' => mt_rand(1,10),
+            'rate' => mt_rand(1,10),
             'book_id' => mt_rand(1, 10000),
             'author_id' => mt_rand(1, 100),
         ];
